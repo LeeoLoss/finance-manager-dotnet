@@ -1,6 +1,8 @@
 using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Finance.Api.Models;
+
 namespace Finance.Api.Controllers;
 
 [Route("api/[controller]")]

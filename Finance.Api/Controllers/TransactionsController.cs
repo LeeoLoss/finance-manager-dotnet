@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace Finance.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
@@ -26,23 +26,26 @@ namespace Finance.Api.Controllers
         public async Task<ActionResult<IEnumerable<Transaction>>> GetTransactions()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            return await _context.Transactions
-                .Where(t => t.UserId == userId)
-                .ToListAsync();
+            return await _context.Transactions.ToListAsync();
+            //return await _context.Transactions
+                //.Where(t => t.UserId == userId)
+                //.ToListAsync();
         }
 
         // 1.2 - Create a new transaction
         [HttpPost]
         public async Task<ActionResult<Transaction>> PostTransaction(Transaction transaction)
         {
+            /*
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (string.IsNullOrEmpty(userId))
             {
                 return Unauthorized("User not authenticated or not found.");
             }
+            */
 
-            transaction.UserId = userId;
+            transaction.UserId = "Leo-Test";
             _context.Transactions.Add(transaction);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetTransactions), new { id = transaction.Id }, transaction);
